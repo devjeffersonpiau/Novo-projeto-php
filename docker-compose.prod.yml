@@ -1,16 +1,21 @@
+cat > /opt/bolsa-php/docker-compose.prod.yml <<'YAML'
 services:
-  web:
+  php:
     image: jeffersonp/bolsa-php:latest
+    container_name: php-fpm
+    healthcheck:
+      test: ["CMD", "php", "-v"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  web:
+    image: nginx:1.27-alpine
     container_name: web-nginx
+    depends_on:
+      - php
     ports:
       - "80:80"
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
-
-  php:
-    image: jeffersop/bolsa-php:latest
-    container_name: php-fpm
-    environment:
-      - API_BASE=http://web
-    depends_on:
-      - web
+YAML
