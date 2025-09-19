@@ -1,0 +1,12 @@
+# geral
+.DS_Store
+*.log
+
+# docker
+**/.env
+
+# terraform (artefatos locais)
+infra/terraform_azure/.terraform/
+infra/terraform_azure/terraform.tfstate
+infra/terraform_azure/terraform.tfstate.backup
+infra/terraform_azure/*.tfvars

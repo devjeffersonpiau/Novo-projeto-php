@@ -1,0 +1,3 @@
+cat > ".github/workflows/main.yml" <<'YAML'
+# cole aqui o YAML acima…
+YAML
